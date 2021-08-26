@@ -59,25 +59,44 @@ namespace Quest
                 favoriteBeatle
             };
 
-            // Loop through all the challenges and subject the Adventurer to them
-            foreach (Challenge challenge in challenges)
+            runAdventure();
+            
+            Console.WriteLine("Would you like to repeat this quest? Y/N");
+            string answerString = Console.ReadLine().ToLower();
+            bool answer = answerString == "y";
+            
+            if (answer)
             {
-                challenge.RunChallenge(theAdventurer);
-            }
-
-            // This code examines how Awesome the Adventurer is after completing the challenges
-            // And praises or humiliates them accordingly
-            if (theAdventurer.Awesomeness >= maxAwesomeness)
-            {
-                Console.WriteLine("YOU DID IT! You are truly awesome!");
-            }
-            else if (theAdventurer.Awesomeness <= minAwesomeness)
-            {
-                Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
+                Console.WriteLine("Then off we go again!");
+                runAdventure();
             }
             else
             {
-                Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
+                Console.WriteLine("So be it. Farewell, adventurer!");
+            }
+
+            void runAdventure()
+            {
+                // Loop through all the challenges and subject the Adventurer to them
+                foreach (Challenge challenge in challenges)
+                {
+                    challenge.RunChallenge(theAdventurer);
+                }
+
+                // This code examines how Awesome the Adventurer is after completing the challenges
+                // And praises or humiliates them accordingly
+                if (theAdventurer.Awesomeness >= maxAwesomeness)
+                {
+                    Console.WriteLine("YOU DID IT! You are truly awesome!");
+                }
+                else if (theAdventurer.Awesomeness <= minAwesomeness)
+                {
+                    Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
+                }
+                else
+                {
+                    Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
+                }
             }
         }
     }
